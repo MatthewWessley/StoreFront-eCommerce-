@@ -1,0 +1,35 @@
+﻿@using Microsoft.AspNet.Identity
+@using StoreFrontLAB.DATA.EF;
+
+@if (Request.IsAuthenticated) {
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" })) {
+        @Html.AntiForgeryToken()
+
+
+        StoreFrontEntities db = new StoreFrontEntities();
+
+        string userID = User.Identity.GetUserId();
+
+        UserDetail currentUser = db.UserDetails.Where(ud => ud.UserID == userID).FirstOrDefault();
+
+        string userFirst = "Guest";
+
+        if (currentUser != null)
+        {
+            userFirst = currentUser.FirstName;
+        }
+        
+            <li class="nav-item">
+                @Html.ActionLink("Hello " + userFirst + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class="nav-link"})
+            </li>
+            <li class="nav-item"><a href="javascript:document.getElementById('logoutForm').submit()" class="nav-link">Log off</a></li>
+    }
+}
+else {
+        <li class="nav-item">
+            <a href="@Url.Action("Register", "Account")" id="loginLink" class="nav-link" >Register</a>
+        </li>        
+        <li class="nav-item">
+            <a href="@Url.Action("Login", "Account")" id="loginLink" class="nav-link">Log In</a>
+        </li>
+}

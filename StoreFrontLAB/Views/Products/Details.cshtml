@@ -1,0 +1,84 @@
+﻿@model StoreFrontLAB.DATA.EF.Product
+
+@{
+    ViewBag.Title = $"{Model.Name}";
+}
+
+<div id="productContainer">
+    <div id="productHeader">
+        <div id="productHeaderLeft"><h2>@Html.DisplayFor(model => model.Name)</h2></div>
+        <div id="productHeaderRight">@Html.DisplayFor(model => model.Price)</div>
+        <div class="clearfix"></div>
+    </div>
+    <div id="productLeft">
+        <p>
+            <img src="~/Content/images/CandyImages/@Model.ProductImage" alt="@Model.Name" title="@Model.Name" />
+        </p>
+        <p>
+            <strong>
+                @Html.DisplayNameFor(model => model.Category.Name): 
+            </strong>
+            @Html.DisplayFor(model => model.Category.Name)
+        </p>
+        <p>
+
+        </p>
+    </div>
+    <div id="productRight">
+        <p>
+            <strong>
+                @Html.DisplayNameFor(model => model.ProductStatus.Name):
+            </strong>
+            @Html.DisplayFor(model => model.ProductStatus.Name)
+        </p>
+        <p>
+            <strong>
+                @Html.DisplayNameFor(model => model.Manufacturer.Name):
+            </strong>
+            @Html.DisplayFor(model => model.Manufacturer.Name)
+        </p>
+        <p>
+            <strong>
+                @Html.DisplayNameFor(model => model.CandyType.Name):
+            </strong>
+            @Html.DisplayFor(model => model.CandyType.Name)
+        </p>
+        <p>
+            <strong>
+                @Html.DisplayNameFor(model => model.Description):
+            </strong>
+            @Html.DisplayFor(model => model.Description)
+        </p>
+        <p>
+
+        </p>
+    </div>
+    <div class="clearfix"></div>
+    <div id="productFooter">
+        <div id="productFooterLeft">
+            @if (User.IsInRole("Admin"))
+            {
+                @Html.ActionLink("Edit", "Edit", new { id = Model.ID }, new { @class = "btn btn-primary" })
+            }
+        </div>
+        <div id="productFooterRight"></div>
+        @Html.ActionLink("Back to Candy", "Index")
+    </div>
+    <div class="clearfix"></div>
+</div>
+
+<p>
+    @using (Html.BeginForm("AddToCart", "Products", new { ID = Model.ID }, FormMethod.Post, new { @class = "text-center" }))
+    {
+        @Html.HiddenFor(x => x.ID)
+        <span class="label" style="color: black;">Quantity: </span>
+        @Html.TextBox("Qty", 1, new { @class = "form-control", @style = "max-width: 50px;display:inline;" })
+        <input type="submit" value="Add To Cart" class="btn button" name="qty" />
+    }
+    @if (ViewBag.Message != null)
+    {
+        <h2>@ViewBag.Message</h2>
+    }
+</p>
+
+

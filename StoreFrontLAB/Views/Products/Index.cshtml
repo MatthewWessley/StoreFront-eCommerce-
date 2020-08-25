@@ -1,0 +1,125 @@
+﻿@model PagedList.IPagedList<StoreFrontLAB.DATA.EF.Product>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Candy";
+}
+
+
+<div class="container">
+    <br />
+    <h2>@ViewBag.Title</h2>
+
+    @using (Html.BeginForm("Index", "Products", FormMethod.Get))
+    {
+        <p class="pull-right text-right">
+            @Html.TextBox("searchString", ViewBag.CurrentFilter as string, new { placeholder = "Product Name" })
+            <input type="submit" class="btn button" value="Search" />
+        </p>
+
+    }
+
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, currentFilter = ViewBag.CurrentFilter }))
+
+
+    @if (User.IsInRole("Admin"))
+    {
+        <p>
+            @Html.ActionLink("Add New Candy", "Create")
+        </p>
+    }
+
+
+    @if (Model.Count == 0)
+    {
+        <p class="alert alert-warning">
+            No results meet your criteria
+        </p>
+    }
+    else
+    {
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().CandyType.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().Category.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().Manufacturer.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().ProductStatus.Name)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(item.Name, "Details", new { id = item.ID })
+                        @*@Html.DisplayFor(modelItem => item.Name)*@
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CandyType.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Manufacturer.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductStatus.Name)
+                    </td>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                        </td>
+                    }
+                </tr>
+            }
+        </table>
+    }
+</div>
+
+
+
+@*<div class="container">
+        <div class="row">
+            <h4>Candy</h4>
+        </div>
+    </div>
+
+    foreach (var item in Model)
+    {
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="card">
+                        <img src="~/Content/images/CandyImages/" />
+                        <img src="~/Content/images/CandyImages/@Model.ProductImage" alt="@Model.Name" title="@Model.Name" />
+                        <div class="card-body"></div>
+                        <h4>@Html.ActionLink(item.Name, "Details", new { id = item.ID })</h4>
+                        <h6>@Html.DisplayFor(modelItem => item.Price)</h6>
+                        <button class="btn button"><i aria-hidden="true"></i>Add To Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }*@

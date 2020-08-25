@@ -1,0 +1,44 @@
+﻿@model PagedList.IPagedList<StoreFrontLAB.DATA.EF.Category>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Categories";
+}
+
+<div class="container">
+    <br />
+    <h2>@ViewBag.Title</h2>
+
+
+    @if (User.IsInRole("Admin"))
+    {
+        <p>
+            @Html.ActionLink("New Category", "Create")
+        </p>
+    }
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Description)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

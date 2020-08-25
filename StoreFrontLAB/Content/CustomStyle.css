@@ -1,0 +1,106 @@
+﻿/*My stylesheet for custom css and to override ANY other css values from other sheets*/
+
+.button {
+    background-color: #43170C;
+    color: #BC6D18;
+}
+
+#mainContent {
+    width: 95%;
+    margin: auto;
+    min-height: 744px;
+}
+
+
+#productContainer {
+    border: 3px solid #43170C; /*Chocolate Brown Color*/
+    /*box-shadow: 15px 15px gray;*/
+    padding: 1em;
+    width: 75%;
+    margin: 2em auto;
+}
+
+#productHeader h2 {
+    color: #BC6D18; /*Caramel Color*/
+}
+
+#productHeaderLeft {
+    float: left;
+    width: 85%;
+}
+
+#productHeaderRight {
+    font-size: 150%;
+    margin-left: 86%;
+    text-align: right;
+}
+
+#productLeft {
+    float: left;
+    width: 40%;
+}
+
+    #productLeft img {
+        width: 95%;
+    }
+
+#productRight {
+    margin-left: 41%;
+}
+
+#productFooter {
+}
+
+#productFooterLeft {
+    float: left;
+    width: 49%;
+}
+
+#productFooterRight {
+    margin-left: 50%;
+    text-align: right;
+}
+
+label {
+    font-weight: 700;
+}
+
+#productContainer #ISBN {
+    width: 85%;
+    display: inline-block; /*.form-control makes all input display block which drops it down a line.*/
+}
+
+#productContainer #BookStatusID,
+#productContainer #PublisherID,
+#productContainer #GenreID,
+#productContainer #UnitsSold,
+#productContainer #PublishDate {
+    width: 50%;
+    display: inline-block;
+}
+
+#productContainer #Description {
+    height: 5em;
+    resize: none;
+}
+
+#productContainer #BookTitle {
+    height: 2.5em;
+    resize: none;
+}
+
+/*I could target the Right Column and text-align:right to make the inputs line up*/
+
+/*#bookRight
+{
+    text-align: right;
+    We would need to fix a couple things still but it gives an example of options
+}*/
+
+#ErrorMessage {
+    font-size: 1em;
+    color: red;
+    text-align: center;
+    font-style: italic;
+    font-weight: 700;
+}

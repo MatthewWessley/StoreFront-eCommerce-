@@ -1,0 +1,76 @@
+﻿@model Dictionary<int, StoreFrontLAB.Models.ShoppingCartViewModel>
+
+@{
+    ViewBag.Title = "Shopping Cart";
+
+    decimal? cartTotal = 0;
+    int totalCountOfItems = 0;
+}
+
+<div class="container">
+    <br />
+    <h2>@ViewBag.Title</h2>
+    <hr />
+
+
+    @if (Model.Count == 0)
+    {
+        <p class="alert alert-warning">@ViewBag.Message</p>
+    }
+    else
+    {
+        <table class="table">
+            <tr>
+                <th>Candy Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Value.Product.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Value.Product.Price)
+                    </td>
+                    <td>
+                        @*Quantity*@
+                        <!--Allow for a change of quantity in the cart index-->
+                        @using (Html.BeginForm("UpdateCart", "ShoppingCart", FormMethod.Post))
+                        {
+                            //pass the id of the book in this line item
+                            @Html.Hidden("ID", item.Value.Product.ID)
+                            @Html.TextBox("qty", item.Value.Qty, new { @class = "form-control", style = "max-width:50px; display:inline;" })
+
+                            <input type="submit" value="Update Quantity" class="btn button" />
+                        }
+                        @{totalCountOfItems += item.Value.Qty;}
+                    </td>
+                    <td>
+                        <!--Calculate the line total and display in currency format-->
+                        @{
+                            decimal? lineTotal = item.Value.Product.Price * item.Value.Qty;
+                            <!--Update the cart total by summing the lineTotal-->
+                            cartTotal += lineTotal;
+                        }
+                        @string.Format($"{lineTotal:c}")
+                    </td>
+                    <td>
+                        @*RemoveFromCart Functionality*@
+                        @Html.ActionLink("Remove From Cart", "RemoveFromCart", new { id = item.Value.Product.ID })
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+        <p>
+            You have @totalCountOfItems book(s) in your cart.
+            Your total before taxes and shipping is @string.Format($"{cartTotal:c}")
+        </p>
+    }
+</div>

@@ -1,0 +1,178 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>The Confectionary Craving</title>
+    <!--Font Awesome Stylesheet-->
+    <link rel="stylesheet" href="~/Content/css/font-awesome.css">
+    <!-- slider stylesheet -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" />
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="~/Content/css/bootstrap.css" />
+    <!-- fonts style -->
+    <link href="https://fonts.googleapis.com/css?family=Baloo+Chettan|Dosis:400,600,700|Poppins:400,600,700&display=swap" rel="stylesheet" />
+    <!-- Custom styles for this template -->
+    <link href="~/Content/css/style.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="~/Content/css/responsive.css" rel="stylesheet" />
+    <!--Paged List Stylesheet-->
+    <link href="@Url.Content("~/Content/PagedList.css")" rel="stylesheet" type="text/css" />
+    <!--Custom Style Sheet (Should be LAST)-->
+    <link href="~/Content/CustomStyle.css" rel="stylesheet" />
+
+
+</head>
+<body class="sub_page">
+    <div class="hero_area">
+        <!-- header section strats -->
+        <div class="brand_box">
+            <a class="navbar-brand" href="@Url.Action("Index","Home")">
+                <span>
+                    The Confectionary Craving
+                </span>
+            </a>
+        </div>
+        <!-- nav section -->
+        <section class="nav_section">
+            <div class="container">
+                <div class="custom_nav2">
+                    <nav class="navbar navbar-expand  custom_nav-container">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <div class="d-flex  flex-column flex-lg-row align-items-center">
+                                <ul class="navbar-nav  ">
+                                    <li class="nav-item active">
+                                        <a class="nav-link" href="@Url.Action("Index","Home")">Home</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="@Url.Action("Index","Home")">About</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="@Url.Action("Index","Products")">Candy</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                                        {
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="@Url.Action("Index","Categories")">Categories</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="@Url.Action("Index","CandyTypes")">Candy Types</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="@Url.Action("Index","Manufacturers")">Manufacturer</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="@Url.Action("Index","RolesAdmin")">Roles Admin</a>
+                                            @*@Html.ActionLink("RolesAdmin", "Index", "RolesAdmin")*@
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="@Url.Action("Index","UsersAdmin")">Users Admin</a>
+                                            @*@Html.ActionLink("UsersAdmin", "Index", "UsersAdmin")*@
+                                        </li>
+                                    }
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="@Url.Action("Contact","Home")">Contact Us</a>
+                                        </li>
+                                        @Html.Partial("_LoginPartial")
+                                        @if (Session["cart"] != null)
+                                        {
+                                            var cart = (Dictionary<int, StoreFrontLAB.Models.ShoppingCartViewModel>)Session["cart"];
+                                            var cartCount = cart.Sum(x => x.Value.Qty);
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="@Url.Action("Index", "ShoppingCart")">
+                                                    <img src="~/Content/images/shoppingcart24.png" alt="Shopping Cart">
+                                                    <!--SuperScript Text-->
+                                                    <sup><span class="cartCount">@cartCount</span></sup>
+                                                </a>"
+                                            </li>
+                                        }
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </section>
+            <!-- end nav section -->
+            <div id="mainContent">
+                @RenderBody()
+            </div>
+            <!-- info section -->
+            <section class="info_section layout_padding">
+                <div class="container">
+                    <div class="info_logo">
+                        <h2>
+                            Candy Shop
+                        </h2>
+                    </div>
+                    <div class="info_contact">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <a href="">
+                                    <img src="~/Content/images/location.png" alt="">
+                                    <span>
+                                        123 Main Street<br />Lees Summit MO, 12345
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="">
+                                    <img src="~/Content/images/call.png" alt="">
+                                    <span>
+                                        Call : +1(816)772-4747
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="">
+                                    <img src="~/Content/images/mail.png" alt="">
+                                    <span>
+                                        matthew.wessley@outlook.com
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    @*<div class="row">
+                            <div class="col-md-4 col-lg-3">
+                                <div class="info_social">
+                                    <div>
+                                        <a href="https://www.linkedin.com/in/matthew-wessley-0a48a612a" target="_blank">
+                                            <img src="~/Content/images/linkedin.png" alt="Linked In">
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a href="https://www.instagram.com/matthewwessley/" target="_blank">
+                                            <img src="~/Content/images/instagram.png" alt="">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>*@
+                </div>
+            </section>
+            <!-- end info section -->
+            <!-- footer section -->
+        </div>
+
+        <script type="text/javascript" src="~/Content/js/jquery-3.4.1.min.js"></script>
+        <script type="text/javascript" src="~/Content/js/bootstrap.js"></script>
+        <script type="text/javascript" src="~/Content/js/custom.js"></script>
+
+        @RenderSection("Scripts", false)
+
+    </body>
+</html>
+

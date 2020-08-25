@@ -1,0 +1,62 @@
+﻿@model StoreFrontLAB.Models.ContactViewModel
+
+@{
+    ViewBag.Title = "Contact";
+}
+
+    <!-- contact section -->
+    <section class="contact_section layout_padding">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="offset-lg-2 col-md-10 offset-md-1">
+                    <div class="heading_container">
+                        <hr>
+                        <h2>
+                            Connect With Me!
+                        </h2>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+            <div class="layout_padding2-top">
+                <div class="row">
+                    <div class="col-lg-4 offset-lg-2 col-md-5 offset-md-1">
+                        @using (Html.BeginForm())
+                        {
+                            <div class="contact_form-container">
+                                <div>
+                                    <div>
+                                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { placeholder = "Full Name" } })
+                                    </div>
+                                    <div>
+                                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { placeholder = "Email" } })
+                                    </div>
+                                    <div>
+                                        @Html.EditorFor(model => model.Number, new { htmlAttributes = new { placeholder = "Phone Number" } })
+                                    </div>
+                                    <div>
+                                        @Html.EditorFor(model => model.Message, new { htmlAttributes = new { placeholder = "Message" } })
+                                    </div>
+                                    <div>
+                                        <input type="submit" class="btn button" value="Send" href="@Url.Action("Contact","Home")" />
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-6 px-0">
+                        <div class="map_container">
+                            <div class="map-responsive">
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3104.598996783488!2d-94.35940418479045!3d38.910284479568666!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87c11f81c347dc5f%3A0x9bc4b222207cca71!2s1005%20SE%205th%20St%2C%20Lee&#39;s%20Summit%2C%20MO%2064063!5e0!3m2!1sen!2sus!4v1594992150390!5m2!1sen!2sus" width="600" height="300" frameborder="0" style="border:0; width:90%; height:100%" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end contact section -->
+
+    <script type="text/javascript" src="~/Content/js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/bootstrap.js"></script>
+    <script type="text/javascript" src="~/Content/js/custom.js"></script>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7a8c547949dc4df4b4aceaecb1bdc52e" Name="Diagram1">
+        <EntityTypeShape EntityType="StoreFrontModel.CandyType" Width="1.5" PointX="3.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreFrontModel.Category" Width="1.5" PointX="11.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreFrontModel.Manufacturer" Width="1.5" PointX="11.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreFrontModel.ProductStatus" Width="1.5" PointX="3.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreFrontModel.UserDetail" Width="1.5" PointX="7.5" PointY="5.125" />
+        <EntityTypeShape EntityType="StoreFrontModel.Product" Width="1.5" PointX="7.625" PointY="0.75" />
+        <AssociationConnector Association="StoreFrontModel.FK_Products_CandyTypes" />
+        <AssociationConnector Association="StoreFrontModel.FK_Products_Categories" />
+        <AssociationConnector Association="StoreFrontModel.FK_Products_Manufacturers" />
+        <AssociationConnector Association="StoreFrontModel.FK_Products_ProductStatuses" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
